@@ -49,7 +49,10 @@ public:
     Transform(Mat3 i_transformation = Mat3::Identity(), Vec3 i_translation = Vec3(0., 0., 0.))
             : m_transformation(i_transformation), m_translation(i_translation) {
         //Question 1.3: TODO, calculer la matrice transformation m_vector_transformation à appliquer aux vecteurs normaux.
-        //m_vector_transformation = ...;
+        m_vector_transformation = Mat3::inverse(i_transformation);
+        m_vector_transformation.transpose();
+
+
     }
 
     //Fonction pour appliquer la transformation à un point Vec3
@@ -65,6 +68,7 @@ public:
     //Transformation appliquer à un vecteur normalisé : example une normale
     Vec3 apply_to_normalized_vector(Vec3 const &i_vector) {
         Vec3 result = i_vector;
+        result = m_transformation * result;
         //Question 1.4: TODO, appliquer la matrice de transformation de vecteurs et normaliser
         return result;
     }
