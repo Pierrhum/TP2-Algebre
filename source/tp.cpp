@@ -69,6 +69,7 @@ public:
     Vec3 apply_to_normalized_vector(Vec3 const &i_vector) {
         Vec3 result = i_vector;
         result = m_transformation * result;
+        result.normalize();
         //Question 1.4: TODO, appliquer la matrice de transformation de vecteurs et normaliser
         return result;
     }
