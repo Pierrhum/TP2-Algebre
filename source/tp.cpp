@@ -204,15 +204,24 @@ static bool fullScreen = false;
 
 //Calcul de la projection d'un point sur un plan
 Vec3 project(Vec3 const &input_point, Plane const &i_plane) {
-    Vec3 result = input_point;
     //Question 2.3: TODO, projeter input_point sur le plan i_plane
+    float n = Vec3().dot((i_plane.point - input_point), i_plane.normal) / i_plane.normal.length();
+    Vec3 result = Vec3(input_point[0] - i_plane.normal[0] * n,
+                  input_point[1] - i_plane.normal[1] * n,
+                  input_point[2] - i_plane.normal[2] * n);
     return result;
 }
 
 // Calcul de la projection d'un point sur une droite (définie par un vecteur et un point)
 Vec3 project(Vec3 const &input_point, Vec3 const &i_origin, Vec3 const &i_axis) {
-    Vec3 result = input_point;
     //Question 2.3: TODO, projeter input_point sur l'axe
+    Vec3 ab = i_axis - i_origin;
+    Vec3 u = ab / ab.length();
+    Vec3 ac = input_point - i_origin;
+    float n = Vec3().dot(ab, ac) / ac.length();
+    Vec3 result = Vec3(i_origin[0] - u[0] * n,
+                       i_origin[1] - u[1] * n,
+                       i_origin[2] - u[2] * n);
     return result;
 }
 
