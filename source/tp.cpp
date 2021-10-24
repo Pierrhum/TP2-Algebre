@@ -930,10 +930,15 @@ int main(int argc, char **argv) {
     for (unsigned int i = 0; i < 3; i++) {
         //Projection des points sur l'axe courant (utiliser le vecteur normaliser pour chaque axe)
         std::vector <Vec3> projection_on_basis;
-        project(mesh.vertices, projection_on_basis, basis.origin(), basis.normalized_axis(i));
+        //project(mesh.vertices, projection_on_basis, basis.origin(), basis.normalized_axis(i));
+        project(mesh.vertices,projection_on_basis , planes[i]);
 
         // Question 2.5: TODO Compléter
         // variance[i] =...
+        for (unsigned int j = 0; j <  projection_on_basis.size(); j++){
+            variance[i] += pow((projection_on_basis[j] - mesh.vertices[j]).length(), 2) ;
+        }
+        variance[i] /= (float)projection_on_basis.size();
     }
 
     // Comparaison de la variance et des racines des valeurs propres

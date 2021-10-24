@@ -344,7 +344,7 @@ public:
 
         //Question 3.2: TODO, trouver la fonction gsl_eigen pour faire le calcul de la décomposition SVD
         // gsl_linalg_...
-
+        gsl_linalg_SV_decomp(u,v,s,workspace);
         //Assignation des valeurs aux matrices de sortie
         sx = s->data[0];
         sy = s->data[1];
